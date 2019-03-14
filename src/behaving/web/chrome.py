@@ -32,12 +32,17 @@ class WebDriver(BaseWebDriver):
             "download.directory_upgrade": "true",
             "download.prompt_for_download": "false",
             "download.extensions_to_open": "",
-            "disable-popup-blocking": "true"
+            "disable-popup-blocking": "true",
         }
 
         options.add_experimental_option("prefs", prefs)
 
-        self.driver = Chrome(chrome_options=options, **kwargs)
+        self.driver = Chrome(
+            chrome_options=options,
+            desired_capabilities={"goog:chromeOptions": {
+                "prefs": prefs
+            }},
+            **kwargs)
 
         self.element_class = WebDriverElement
 
