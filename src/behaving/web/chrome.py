@@ -12,8 +12,12 @@ class WebDriver(BaseWebDriver):
 
     driver_name = "Chrome"
 
-    def __init__(self, user_agent=None, wait_time=2, fullscreen=False,
-                 options=None, **kwargs):
+    def __init__(self,
+                 user_agent=None,
+                 wait_time=2,
+                 fullscreen=False,
+                 options=None,
+                 **kwargs):
 
         options = Options() if options is None else options
 
@@ -23,11 +27,13 @@ class WebDriver(BaseWebDriver):
         if fullscreen:
             options.add_argument('--kiosk')
 
-        prefs = {"download": {
-            "default_directory": _DOWNLOAD_PATH,
-            "directory_upgrade": True,
-            "extensions_to_open": ""
-        }}
+        prefs = {
+            "download.default_directory": _DOWNLOAD_PATH,
+            "download.directory_upgrade": "true",
+            "download.prompt_for_download": "false",
+            "download.extensions_to_open": "",
+            "disable-popup-blocking": "true"
+        }
 
         options.add_experimental_option("prefs", prefs)
 
